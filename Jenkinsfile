@@ -10,7 +10,7 @@ node() {
        stage('NPM Install'){
          sh 'node -v'
          dir('users-service') {
-			sh 'echo "Summer12!" | sudo -S apt install npm'
+         sh 'npm test'   
 		 }
        }
        stage('NPM Unit Test'){
@@ -18,9 +18,6 @@ node() {
 			sh "npm test"
 		 }
        }
-       
-       stage ('Docker compose build install')
-       sh 'echo "Summer12!" | sudo -S apt install docker-compose'
        
        stage('Container Build'){
 		 sh "docker-compose build --force"
@@ -33,7 +30,7 @@ node() {
 	   stage('Node Integration Testing'){
 		 dir('integration-test') {
 		    sleep 20
-		    sh 'echo "Summer12!" | sudo -S npm install && npm start'
+		    sh "npm install && npm start"
 		 }
        }
 	   
@@ -43,9 +40,9 @@ node() {
 
          mail body: 'project build successful',
                      from: 'jenkins@buildserver.com',
-                     replyTo: 'anuj_sharma401@yahoo.com',
+                     replyTo: 'ladudarko@gmail.com',
                      subject: 'project build successful',
-                     to: 'anuj_sharma401@yahoo.com'
+                     to: 'ladudarko@gmail.com'
        }
 
 
@@ -55,9 +52,9 @@ node() {
         currentBuild.result = "FAILURE"
             mail body: "project build error is here: ${env.BUILD_URL}" ,
             from: 'jenkins@buildserver.com',
-            replyTo: 'anuj_sharma401@yahoo.com',
+            replyTo: 'ladudarko@gmail.com',
             subject: 'project build failed',
-            to: 'anuj_sharma401@yahoo.com'
+            to: 'ladudarko@gmail.com'
 	sh "docker-compose down"
         throw err
     }
