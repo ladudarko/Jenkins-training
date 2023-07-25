@@ -10,7 +10,7 @@ node() {
        stage('NPM Install'){
          sh 'node -v'
          dir('users-service') {
-			sh "echo 'Summer12!' | sudo -S apt install npm"
+			sh 'echo "Summer12!" | sudo -S apt install npm'
 		 }
        }
        stage('NPM Unit Test'){
@@ -20,7 +20,7 @@ node() {
        }
        
        stage ('Docker compose build install')
-       sh "echo 'Summer12!' | sudo -S apt install docker-compose"
+       sh 'echo "Summer12!" | sudo -S apt install docker-compose'
        
        stage('Container Build'){
 		 sh "docker-compose build --force"
@@ -33,7 +33,7 @@ node() {
 	   stage('Node Integration Testing'){
 		 dir('integration-test') {
 		    sleep 20
-		    sh "echo 'Summer12!' | sudo -S npm install && npm start"
+		    sh 'echo "Summer12!" | sudo -S npm install && npm start'
 		 }
        }
 	   
