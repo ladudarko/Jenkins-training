@@ -10,7 +10,7 @@ node() {
        stage('NPM Install'){
          sh 'node -v'
          dir('users-service') {
-			sh "npm install"
+			sh "sudo apt install npm"
 		 }
        }
        stage('NPM Unit Test'){
@@ -18,7 +18,10 @@ node() {
 			sh "npm test"
 		 }
        }
-
+       
+       stage ('Docker compose build install')
+       sh "apt install docker-compose"
+       
        stage('Container Build'){
 		 sh "docker-compose build --force"
        }
